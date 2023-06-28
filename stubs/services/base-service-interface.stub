@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Services;
+
+use ArchLayer\Service\Contract\ServiceInterface as BaseServiceInterface;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+
+interface ServiceInterface extends BaseServiceInterface
+{
+    /**
+     * Update or create a new model.
+     *
+     * @param array $attributes
+     * @param array $values
+     * @return Model|null
+     */
+    public function updateOrCreate(array $attributes, array $values = []): ?Model;
+
+    /**
+     * Create a new model and save it to the database.
+     *
+     * @param array $parameters
+     *
+     * @return Model|null
+     */
+    public function create(array $parameters): ?Model;
+
+    /**
+     * Delete a model entry.
+     *
+     * @param Model $model
+     *
+     * @return bool|null
+     */
+    public function delete(Model $model): ?bool;
+
+    /**
+     * Update an existing model.
+     *
+     * @param Model $model
+     * @param array $attributes
+     *
+     * @return Model
+     */
+    public function update(Model $model, array $attributes = []): Model;
+
+    /**
+     * Find one record.
+     *
+     * @param        $value
+     * @param string $column
+     *
+     * @return Model|null
+     */
+    public function findOne($value, string $column = 'id'): ?Model;
+
+    /**
+     * Find many records.
+     *
+     * @param        $value
+     * @param string $column
+     *
+     * @return Collection
+     */
+    public function findMany($value, string $column = 'id'): Collection;
+
+    /**
+     * Fetch all records.
+     *
+     * @return Collection
+     */
+    public function all(): Collection;
+}

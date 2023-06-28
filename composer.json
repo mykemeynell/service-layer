@@ -1,0 +1,31 @@
+{
+  "name": "mykemeynell/service-layer",
+  "description": "Storage service layer for laravel",
+  "type": "library",
+  "require-dev": {
+    "laravel/laravel": "^10"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "ServiceLayer\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Myke Meynell",
+      "email": "hi@myke.codes"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "mykemeynell/archlayer": "^1.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "ServiceLayer\\Providers\\ServiceLayerServiceProvider"
+      ]
+    }
+  }
+}

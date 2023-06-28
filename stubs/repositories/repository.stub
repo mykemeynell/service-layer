@@ -1,0 +1,15 @@
+<?php
+
+namespace %NAMESPACE%;
+
+use %MODEL_INTERFACE_NAMESPACE%\%MODEL_INTERFACE_NAME%;
+use %INTERFACE_NAMESPACE%\%INTERFACE_NAME%;
+use App\Repositories\Repository;
+
+class %CLASS_NAME% extends Repository implements %INTERFACE_NAME%
+{
+    public function __construct(%MODEL_INTERFACE_NAME% $model)
+    {
+        parent::__construct($model);
+    }
+}

@@ -1,0 +1,10 @@
+<?php
+
+namespace %NAMESPACE%;
+
+use %INTERFACE_NAMESPACE%;
+
+interface %CLASS_NAME% extends %INTERFACE_NAME%
+{
+    // .
+}

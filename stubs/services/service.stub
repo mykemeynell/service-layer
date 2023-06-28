@@ -1,0 +1,18 @@
+<?php
+
+namespace %NAMESPACE%;
+
+use %REPOSITORY_INTERFACE_NAMESPACE%\%REPOSITORY_INTERFACE_NAME%;
+use %INTERFACE_NAMESPACE%\%INTERFACE_NAME%;
+use App\Services\Service;
+
+/**
+ * @method %REPOSITORY_INTERFACE_NAME% getRepository()
+ */
+class %CLASS_NAME% extends Service implements %INTERFACE_NAME%
+{
+    public function __construct(%REPOSITORY_INTERFACE_NAME% $repository)
+    {
+        $this->setRepository($repository);
+    }
+}

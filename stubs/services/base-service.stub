@@ -1,0 +1,92 @@
+<?php
+
+namespace App\Services;
+
+use ArchLayer\Service\Service as BaseService;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\ParameterBag;
+use App\Services\ServiceInterface;
+
+abstract class Service extends BaseService implements ServiceInterface
+{
+    /**
+     * @inheritDoc
+     */
+    public function updateOrCreate(array $attributes, array $values = []): ?Model
+    {
+        return $this->getRepository()->getModel()::updateOrCreate(
+            $attributes, $values
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function create(array $parameters): ?Model
+    {
+        $model = $this->getRepository()->getModel()->newInstance(
+            $this->getFillableParameters(new ParameterBag($parameters))
+        );
+        $model->save();
+
+        return $model;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete(Model $model): ?bool
+    {
+        return $model->delete();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update(Model $model, array $attributes = []): Model
+    {
+        $model->update(
+            Arr::only($attributes, $this->getRepository()->getModel()->getFillable())
+        );
+
+        return $model->refresh();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findOne($value, string $column = 'id'): ?Model
+    {
+        return $this->getRepository()->findUsing($value, $column)->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findMany($value, string $column = 'id'): Collection
+    {
+        return $this->getRepository()->findUsing($value, $column)->get();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function all(): Collection
+    {
+        return $this->getRepository()->getModel()::all();
+    }
+
+    /**
+     * Get the fillable entity attributes from the parameter bag.
+     *
+     * @param ParameterBag $parameterBag
+     *
+     * @return array
+     */
+    protected function getFillableParameters(ParameterBag $parameterBag): array
+    {
+        return Arr::only($parameterBag->all(), $this->getRepository()->getModel()->getFillable());
+    }
+}

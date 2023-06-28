@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Repositories;
+
+use ArchLayer\Repository\RepositoryInterface as BaseRepositoryInterface;
+
+interface RepositoryInterface extends BaseRepositoryInterface
+{
+    /**
+     * Find records based on a given column and value.
+     *
+     * @param        $value
+     * @param string $column
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|array
+     */
+    public function findUsing($value, string $column = 'id'): \Illuminate\Database\Eloquent\Collection|array;
+
+    /**
+     * Test if a record exists using given column and value.
+     *
+     * @param string $column
+     * @param        $value
+     *
+     * @return bool
+     */
+    public function existsUsing(string $column, $value): bool;
+}

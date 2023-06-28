@@ -1,0 +1,10 @@
+<?php
+
+namespace %NAMESPACE%;
+
+use App\Services\ServiceInterface;
+
+interface %CLASS_NAME% extends ServiceInterface
+{
+
+}

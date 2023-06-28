@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\ModelInterface;
+use ArchLayer\Repository\Repository as BaseRepository;
+use App\Repositories\RepositoryInterface;
+
+abstract class Repository extends BaseRepository implements RepositoryInterface
+{
+    /**
+     * Build the repository.
+     *
+     * @param ModelInterface $model
+     */
+    public function __construct(ModelInterface $model)
+    {
+        $this->setModel($model);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findUsing($value, string $column = 'id'): \Illuminate\Database\Eloquent\Collection|array
+    {
+        return $this->builder()->where($column, $value)->get();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function existsUsing(string $column, $value): bool
+    {
+        return $this->builder()->where($column, $value)->exists();
+    }
+}
