@@ -59,7 +59,7 @@ class MakeLayerCommand extends Command
         $this->createService();
 
         $name = $this->argument('name');
-        $layerName = strtolower(Str::singular($name));
+        $layerName = strtolower(Str::snake(Str::singular($name), '-'));
         $serviceLayerArray = [
             $layerName => [
                 'model' => [
