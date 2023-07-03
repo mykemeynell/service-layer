@@ -59,8 +59,10 @@ trait CreatesModels
                 suffix: 'Interface'
             );
 
+            $baseModel = config('service-layer.base_model', \Illuminate\Database\Eloquent\Model::class);
+
             $this->files->replaceInFile('extends Model', "extends Model implements {$modelInterfaceName}", $modelPath);
-            $this->files->replaceInFile('use Illuminate\Database\Eloquent\Model;', "use Illuminate\Database\Eloquent\Model;\nuse {$modelInterfaceNamespace}\\{$modelInterfaceName};", $modelPath);
+            $this->files->replaceInFile('use Illuminate\Database\Eloquent\Model;', "use {$baseModel} as Model;\nuse {$modelInterfaceNamespace}\\{$modelInterfaceName};", $modelPath);
         }
     }
 }

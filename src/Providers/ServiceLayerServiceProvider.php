@@ -24,6 +24,8 @@ class ServiceLayerServiceProvider extends ServiceProvider
             __DIR__ . '/../../publishables/config/service-layer.php' => config_path('service-layer.php'),
         ]);
 
+        $this->mergeConfigFrom(__DIR__ . '/../../publishables/config/service-layer.php', 'service-layer');
+
         $this->commands([MakeLayerCommand::class]);
 
         $this->registerAliases();

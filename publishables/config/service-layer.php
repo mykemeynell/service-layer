@@ -9,5 +9,7 @@ return [
 //            'repository' => [\App\Repositories\UserRepositoryInterface::class, \App\Repositories\UserRepository::class],
 //        ]
 
-    ]
+    ],
+
+    'base_model' => \Illuminate\Database\Eloquent\Model::class,
 ];
